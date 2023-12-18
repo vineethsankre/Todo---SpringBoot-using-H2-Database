@@ -41,6 +41,19 @@ public class TodoH2Service implements TodoRepository {
         return savedTodo;
     }
 
-    
+    @Override
+    public Todo updateTodo(int id, Todo todo) {
+        if (todo.getTodo() != null) {
+            db.update("UPDATE TODOLIST SET todo = ? WHERE id = ?", todo.getTodo(), id);
+        }
+        if (todo.getPriority() != null) {
+            db.update("UPDATE TODOLIST SET priority = ? WHERE id = ?", todo.getPriority(), id);
+        }
+        if (todo.getStatus() != null) {
+            db.update("UPDATE TODOLIST SET staus = ? WHERE id = ?", todo.getStatus(), id);
+        }
+
+        return getTodoById(id);
+    }
 
 }
