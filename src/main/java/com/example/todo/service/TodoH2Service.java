@@ -14,4 +14,21 @@ public class TodoH2Service implements TodoRepository {
     @Autowired
     JdbcTemplate db;
 
+    @Override
+    public ArrayList<Todo> addTodo(){
+        List<Todo> todoList = db.query("SELECT * FROM TODOLIST", new TodoRowMapper());
+        ArrayList<Todo> todos = new ArrayList<>(todoList);
+        return todos;
+    }
+
+    @Override
+    public Todo getTodoById(int id){
+        try {
+            Todo todo = db.queryForObject("SELECT * FROM TODOLIST WHERE id = ?", new TodoRowMapper(), id);
+            return todo;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
