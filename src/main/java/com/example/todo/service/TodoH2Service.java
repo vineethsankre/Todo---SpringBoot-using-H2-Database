@@ -6,6 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
+
+import javax.validation.OverridesAttribute;
+
 import com.example.todo.repository.TodoRepository;
 import com.example.todo.model.*;
 
@@ -54,6 +57,11 @@ public class TodoH2Service implements TodoRepository {
         }
 
         return getTodoById(id);
+    }
+
+    @Override
+    public void deleteTodo(int id){
+        db.update("DELETE FROM TODOLIST WHERE id = ?",  id);
     }
 
 }
