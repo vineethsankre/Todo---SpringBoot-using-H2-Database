@@ -37,8 +37,10 @@ public class TodoH2Service implements TodoRepository {
                 todo.getTodo(), todo.getPriority(), todo.getStatus());
         Todo savedTodo = db.queryForObject(
                 "SELECT * FROM TODOLIST WHERE todo = ? and priority = ? and status = ?",
-                new todo.getTodo() , todo.getPriority(), todo.getStatus());
+                new TodoRowMapper(), todo.getTodo(), todo.getPriority(), todo.getStatus());
         return savedTodo;
     }
+
+    
 
 }
